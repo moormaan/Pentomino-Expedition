@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://1g8aqeg3imha"]
+
+[ext_resource type="Script" path="res://Scripts/Scene/PentominoShowcase.gd" id="1_u10m1"]
+[ext_resource type="Script" path="res://Scripts/Manager/RotatingCamera.gd" id="2_0fwr0"]
+[ext_resource type="AudioStream" uid="uid://cowxaulqk4ta1" path="res://Assets/Sounds/wood-perc-loop.mp3" id="3_vc75x"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_asqsl"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_fmh7i"]
+sky_material = SubResource("ProceduralSkyMaterial_asqsl")
+
+[sub_resource type="Environment" id="Environment_oil07"]
+background_mode = 2
+sky = SubResource("Sky_fmh7i")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="PentominoShowcase" type="Node3D"]
+script = ExtResource("1_u10m1")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_oil07")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="RotatingCamera" type="Camera3D" parent="."]
+transform = Transform3D(-8.10151e-09, 0.982674, -0.185341, -0.165874, 0.182773, 0.969061, 0.986147, 0.0307432, 0.163, 5.13825, 20, 8.95523)
+script = ExtResource("2_0fwr0")
+
+[node name="PercussionPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_vc75x")
+
+[node name="PentominoContainer" type="Node3D" parent="."]
