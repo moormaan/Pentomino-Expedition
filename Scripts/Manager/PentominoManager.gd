@@ -63,6 +63,7 @@ func add_pentomino_mesh(pentomino_index: int, parent: Node3D, instance_position:
 	parent.add_child(instance)
 	return instance
 
+var pentomino_ordinal = 0
 
 func add_pentomino_rigid_body(
 		pentomino_index: int,
@@ -70,9 +71,17 @@ func add_pentomino_rigid_body(
 		instance_position: Vector3,
 		rotation_x: float,
 		rotation_y: float,
-		rotation_z: float) -> RigidBody3D:
+		rotation_z: float, 
+		collision_sound_player: AudioStreamPlayer) -> RigidBody3D:
 
 	var rigid_body_instance = RigidBody3D.new()
+	rigid_body_instance.name = \
+		"Pentomino_" + \
+		pentomino_definitions[pentomino_index].name + \
+		"_" + \
+		str(pentomino_ordinal)
+	rigid_body_instance.set_script(load("res://Scripts/Manager/PentominoSignalHandler.gd"))
+
 	var mesh_instance = add_pentomino_mesh(pentomino_index, rigid_body_instance, Vector3(0, 0, 0))
 
 	rigid_body_instance.mass = 5
@@ -96,6 +105,22 @@ func add_pentomino_rigid_body(
 	rigid_body_instance.rotate_z(rotation_z)
 
 	rigid_body_instance.transform.origin = instance_position
+
+	# Add ordinal property
+	rigid_body_instance.set("ordinal", pentomino_ordinal)
+	pentomino_ordinal += 1
+
+	# Set collision layer and mask to 1
+	rigid_body_instance.collision_layer = 1
+	rigid_body_instance.collision_mask = 1
+
+	rigid_body_instance.set("collision_sound_player", collision_sound_player)
 	
 	parent.add_child(rigid_body_instance)
+
+	# Set contact monitor to true
+	rigid_body_instance.contact_monitor = true
+	rigid_body_instance.max_contacts_reported = 2
+	rigid_body_instance.connect("body_entered", Callable(rigid_body_instance, "_on_body_entered"))
+
 	return rigid_body_instance

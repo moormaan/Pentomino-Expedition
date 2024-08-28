@@ -1,8 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://1g8aqeg3imha"]
+[gd_scene load_steps=12 format=3 uid="uid://1g8aqeg3imha"]
 
 [ext_resource type="Script" path="res://Scripts/Scene/PentominoShowcase.gd" id="1_u10m1"]
 [ext_resource type="Script" path="res://Scripts/Manager/RotatingCamera.gd" id="2_0fwr0"]
 [ext_resource type="AudioStream" uid="uid://cowxaulqk4ta1" path="res://Assets/Sounds/wood-perc-loop.mp3" id="3_vc75x"]
+[ext_resource type="AudioStream" uid="uid://cn2va44wnm0wr" path="res://Assets/Sounds/wood-thud-01.mp3" id="4_54uj8"]
+[ext_resource type="AudioStream" uid="uid://2df1rm0gh6n" path="res://Assets/Sounds/wood-thud-02.mp3" id="5_xngwe"]
+[ext_resource type="AudioStream" uid="uid://bd6upjl0of46s" path="res://Assets/Sounds/wood-thud-03.mp3" id="6_aedry"]
+[ext_resource type="AudioStream" uid="uid://c1qwyaky2kykr" path="res://Assets/Sounds/wood-thud-04.mp3" id="7_qpjpv"]
+[ext_resource type="AudioStream" uid="uid://bwwu7q1pkfxbo" path="res://Assets/Sounds/wood-thud-05.mp3" id="8_v34pl"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_asqsl"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -31,7 +36,24 @@ shadow_enabled = true
 transform = Transform3D(-8.10151e-09, 0.982674, -0.185341, -0.165874, 0.182773, 0.969061, 0.986147, 0.0307432, 0.163, 5.13825, 20, 8.95523)
 script = ExtResource("2_0fwr0")
 
-[node name="PercussionPlayer" type="AudioStreamPlayer" parent="."]
+[node name="PentominoContainer" type="Node3D" parent="."]
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="PercussionPlayer" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("3_vc75x")
 
-[node name="PentominoContainer" type="Node3D" parent="."]
+[node name="CollisionSoundPlayer01" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("4_54uj8")
+
+[node name="CollisionSoundPlayer02" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("5_xngwe")
+
+[node name="CollisionSoundPlayer03" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("6_aedry")
+
+[node name="CollisionSoundPlayer04" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("7_qpjpv")
+
+[node name="CollisionSoundPlayer05" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("8_v34pl")

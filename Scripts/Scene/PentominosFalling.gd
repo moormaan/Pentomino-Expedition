@@ -4,10 +4,13 @@ var pentomino_manager = preload("res://Scripts/Manager/PentominoManager.gd").new
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	pentomino_manager.name = "PentominoManager"
+
 	# Use add_pentomino_rigid_body to add an instance of every pentomino to 
 	# the scene with a random position above the table and random rotations
 	for i in 12:
-		for wave in 1:
+		for wave in 10:
+			var collision_sound_player: AudioStreamPlayer = $Sounds.get_node("CollisionSoundPlayer0" + str(randi() % 5 + 1))
 			pentomino_manager.add_pentomino_rigid_body(
 				i, 
 				self, 
@@ -17,7 +20,8 @@ func _ready():
 					randf_range(-7, 7)), 
 				randf_range(-PI, PI), 
 				randf_range(-PI, PI), 
-				randf_range(-PI, PI))
+				randf_range(-PI, PI),
+				collision_sound_player)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
