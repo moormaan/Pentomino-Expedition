@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Pentomino Expedition"
-run/main_scene="res://Scenes/PentominosFalling.tscn"
+run/main_scene="res://Scenes/PentominoShowcase.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -22,3 +22,7 @@ project/assembly_name="Pentomino Expedition"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/godotversionupdater/plugin.cfg")
+
+[rendering]
+
+textures/vram_compression/import_etc2_astc=true
