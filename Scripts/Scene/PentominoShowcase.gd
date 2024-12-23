@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var percussion_player: AudioStreamPlayer = $PercussionPlayer
+@onready var percussion_player: AudioStreamPlayer = $Sounds/PercussionPlayer
 @onready var pentomino_container: Node3D = $PentominoContainer
 
 var mesh_operations = preload("res://Scripts/Manager/MeshOperations.gd").new()
@@ -18,13 +18,17 @@ func add_all_pentominos(parent: Node3D):
 			var index = i * 4 + j
 			print("Adding pentomino " + str(index))
 
+			var collision_sound_player: AudioStreamPlayer = $Sounds.get_node("CollisionSoundPlayer0" + str(randi() % 5 + 1))
+
 			var pentomino = pentomino_manager.add_pentomino_rigid_body(
 				index,
 				parent,
 				next_instance_position,
 				0,
 				0,
-				0) 
+				0, 
+				collision_sound_player) 
+
 			pentomino.gravity_scale = 0
 
 			var pentomino_height = pentomino_manager.pentomino_height(index)
